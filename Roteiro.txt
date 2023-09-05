@@ -1,0 +1,5 @@
+//TODO criar lista de despesas
+//TODO criar método de cadastro de despesas
+//TODO criar variável saldo atual
+//TODO calcular saldo atual
+//TODO cadastrar rendas

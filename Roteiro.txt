@@ -1,3 +1,6 @@
+TODO ATUAL implementar as modais como listas da modal base
+
+
 //TODO criar lista de despesas
 //TODO criar método de cadastro de despesas
 //TODO criar variável saldo atual

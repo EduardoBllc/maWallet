@@ -6,7 +6,7 @@ import '../constants.dart';
 
 class FinancialData extends ChangeNotifier{
   List<Transaction> _transactions = [
-    InputTransaction(title: 'Salário do mês', value: 3000, origin: 'Empresa'),
+    InputTransaction(title: 'Salário do mês', value: 3000),
     OutputTransaction(category: Category.contas, title: 'Internet', value: 110),
     OutputTransaction(category: Category.educacao, title: 'DNC', value: 500),
   ];

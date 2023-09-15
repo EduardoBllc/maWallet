@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import '../constants.dart';
 
 abstract class Transaction {
@@ -15,9 +13,7 @@ class InputTransaction extends Transaction {
   InputTransaction(
       {required super.title,
       required super.value,
-      required this.origin,
       super.type = TransactionType.input});
-  final String origin;
 }
 
 class OutputTransaction extends Transaction {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ma_wallet/models/financial_data.dart';
 import 'package:provider/provider.dart';
 import 'screens/main_page.dart';
-import 'modals/add_transaction_popup.dart';
+import 'components/add_transaction_popup.dart';
 
 void main() => runApp(MaWalletApp());
 
@@ -11,11 +11,8 @@ class MaWalletApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    FinancialData financialData = FinancialData();
-
-    return ChangeNotifierProvider<FinancialData>(
-      create: (BuildContext context) => financialData,
+    return ChangeNotifierProvider(
+      create: (context) => FinancialData(),
       child: MaterialApp(
         initialRoute: '/',
         routes: {

@@ -23,10 +23,10 @@ class TransactionCard extends StatelessWidget {
         subtitle: Text('R\$${formattedValue}0'),
         trailing: transaction.type == TransactionType.output
             ? Icon(
-                transaction.category.icon,
+                transaction.category?.icon,
                 size: 40,
               )
-            : null,
+            : Icon(Icons.payments_outlined, size: 40,),
       ),
     );
   }

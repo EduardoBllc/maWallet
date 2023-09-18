@@ -13,6 +13,7 @@ class PopUpField extends StatelessWidget {
     return Padding(
       padding:  MediaQuery.of(context).viewInsets,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             title,

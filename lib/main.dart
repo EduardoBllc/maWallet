@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ma_wallet/models/financial_data.dart';
 import 'package:provider/provider.dart';
 import 'screens/main_page.dart';
-import 'components/add_transaction_popup.dart';
 
 void main() => runApp(MaWalletApp());
 
@@ -17,7 +16,6 @@ class MaWalletApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/' : (context) => MainPage(),
-          '/add' : (context) => AddPopUp(),
         },
       ),
     );

@@ -6,7 +6,7 @@ abstract class Transaction {
   final String title;
   final double value;
   final TransactionType type;
-  final Category category;
+  final Category? category;
 }
 
 class InputTransaction extends Transaction {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 
 enum Category {
@@ -16,10 +15,4 @@ enum Category {
   const Category(this.icon, this.texto);
   final IconData icon;
   final String texto;
-}
-
-enum TransactionType {
-  none,
-  input,
-  output,
 }

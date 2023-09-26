@@ -16,7 +16,7 @@ class TransactionsList extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           itemCount: financialData.transactions.length,
           itemBuilder: (context, index){
-            return TransactionCard(transaction: financialData.transactions[index]);
+            return TransactionCard(transaction: financialData.transactions[index], index: index,);
           },
         );
       },

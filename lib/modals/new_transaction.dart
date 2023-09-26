@@ -91,6 +91,12 @@ class InputModalWidget extends StatelessWidget {
           },
         ),
         const SizedBox(height: 10),
+        InputDatePickerFormField(
+          firstDate: DateTime(2018),
+          lastDate: DateTime.now(),
+          initialDate: DateTime.now(),
+        ),
+        const SizedBox(height: 10),
         Consumer<FinancialData>(
           builder: (BuildContext context, FinancialData financialData,
               Widget? child) {
@@ -99,7 +105,7 @@ class InputModalWidget extends StatelessWidget {
               onPressed: () {
                 if (titulo != '' && valor != 0) {
                   financialData.addTransaction(
-                      InputTransaction(value: valor, title: titulo));
+                      InputTransaction(value: valor, title: titulo, date: d));
                   Navigator.pop(context);
                 } else {
                   Alert(
@@ -119,11 +125,21 @@ class InputModalWidget extends StatelessWidget {
 class OutputModalWidget extends StatelessWidget {
   const OutputModalWidget({super.key});
 
+  InputDecoration setInputDecoration(Icon icon, String labelText) {
+    return InputDecoration(
+      prefixIcon: icon,
+      labelText: labelText,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     String titulo = '';
     double valor = 0;
-    Category? categoria = Category.none;
+    Category categoria = Category.none;
     TextEditingController controllerValue = TextEditingController();
 
     return Column(
@@ -173,15 +189,10 @@ class OutputModalWidget extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         DropdownButtonFormField(
-          decoration: InputDecoration(
-            prefixIcon: Icon(Icons.category_outlined),
-            labelText: 'Categoria',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
+          decoration: setInputDecoration(
+              const Icon(Icons.category_outlined), 'Categoria'),
           onChanged: (newValue) {
-            categoria = newValue;
+            categoria = newValue!;
           },
           items: Category.values.map((val) {
             return DropdownMenuItem(
@@ -203,15 +214,22 @@ class OutputModalWidget extends StatelessWidget {
             return AddButton(
               type: TransactionType.output,
               onPressed: () {
-                if (titulo != '' && valor != 0) {
-                  financialData.addTransaction(OutputTransaction(
-                      value: valor, title: titulo, category: categoria));
+                if (titulo != '' ||
+                    valor != 0 ||
+                    categoria.runtimeType == Category) {
+                  financialData.addTransaction(
+                    OutputTransaction(
+                      value: valor,
+                      title: titulo,
+                      category: categoria,
+                    ),
+                  );
                   Navigator.pop(context);
                 } else {
                   Alert(
-                          context: context,
-                          title: 'Preencha todos os campos corretamente')
-                      .show();
+                    context: context,
+                    title: 'Preencha todos os campos corretamente',
+                  ).show();
                 }
               },
             );

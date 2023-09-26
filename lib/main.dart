@@ -13,6 +13,7 @@ class MaWalletApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => FinancialData(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         initialRoute: '/',
         routes: {
           '/' : (context) => MainPage(),

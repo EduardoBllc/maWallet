@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:ma_wallet/constants.dart';
 import 'package:ma_wallet/models/financial_data.dart';
 import 'package:ma_wallet/screens/transactions_list.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:ma_wallet/modals/new_transaction.dart';
 import 'package:provider/provider.dart';
 
-class MainPage extends StatelessWidget {
+import '../models/transaction.dart';
+
+class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<MainPage> createState() => _MainPageState();
+}
 
+class _MainPageState extends State<MainPage> {
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         bottomOpacity: 0,
@@ -22,7 +28,26 @@ class MainPage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(color: Colors.blueAccent, height: 30),
+          Consumer<FinancialData>(
+            builder: (BuildContext context, FinancialData financialData,
+                Widget? child) {
+              financialData.refreshTotal();
+              return Container(
+                padding: EdgeInsets.all(15),
+                color: Colors.blueAccent,
+                child: Center(
+                  child: Text(
+                    'Saldo atual: R\$${financialData.total}',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
           const Expanded(child: TransactionsList()),
         ],
       ),
@@ -34,11 +59,14 @@ class MainPage extends StatelessWidget {
         spacing: 10,
         children: [
           SpeedDialChild(
-            child: Icon(Icons.input),
+            label: 'Entrada',
+            child:
+                Icon(Icons.call_received, color: Colors.greenAccent.shade100),
             onTap: () => modalShow(context, TransactionType.input),
           ),
           SpeedDialChild(
-            child: Icon(Icons.output),
+            label: 'Saída',
+            child: Icon(Icons.call_made, color: Colors.redAccent.shade100),
             onTap: () => modalShow(context, TransactionType.output),
           ),
         ],
